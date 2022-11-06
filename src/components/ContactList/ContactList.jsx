@@ -2,9 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { ContactsList } from './ContactList.styled'
 import ContactItem from '../ContactItem/ContactItem'
+// import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { fetchContacts } from 'redux/contacts/contacts-operation';
+// import { getFilteredContacts,} from 'redux/contacts/contacts-selectors';
 
 
-export default function ContactList({items, removeContact }) {
+export default function ContactList({items }) {
+  // const contacts = useSelector(getFilteredContacts);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, [dispatch]);
 
   return (
     <ContactsList>
@@ -13,7 +23,7 @@ export default function ContactList({items, removeContact }) {
         id={item.id}
         name={item.name}
         number={item.phone}
-        removeContact={removeContact}
+        // removeContact={removeContact}
         text={"Delete"}
       />))}
     </ContactsList>

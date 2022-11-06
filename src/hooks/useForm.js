@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-const useForm = ({initialState, onSubmit}) => {
+const useForm = ({initialState, addOneContact}) => {
     const [state, setState] = useState({...initialState});
 
     const handleChange = ({target}) => {
@@ -14,7 +14,7 @@ const useForm = ({initialState, onSubmit}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit({...state});
+        addOneContact({...state});
         setState({...initialState});
     };
 

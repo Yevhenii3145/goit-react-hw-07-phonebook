@@ -10,7 +10,8 @@ import { Heading } from './components/Heading/Heading';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilter } from 'redux/filter/filter-selectors';
 import {getState, getFilteredContacts,} from 'redux/contacts/contacts-selectors';
-import { fetchContacts, removeContact,addContact,isDublicate } from 'redux/contacts/contacts-operation';
+// import { removeContact} from 'redux/contacts/contacts-operation';
+import { fetchContacts } from 'redux/contacts/contacts-operation';
 
 export default function App() {
   const contacts = useSelector(getFilteredContacts);
@@ -19,33 +20,31 @@ export default function App() {
   const filterId = nanoid();
   const dispatch = useDispatch();
 
+  
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const addOneContact = data => {
-    
-    const action = addContact(data);
+//   const addOneContact = data => {
+//     const action = addContact(data);
+//     if(isDublicate(data,contacts)) {
+//       return alert(`${data.name} is already in contacts`);
+//     }
+//     dispatch(action);
+// };
+
   
-    if(isDublicate(data,contacts)) {
-      return alert(`${data.name} is already in contacts`);
-    }
-    dispatch(action);
-};
-
-  const onRremoveContact = id => {
-    const action = removeContact(id);
-    dispatch(action);
-  };
-
   return (
     <Container>
       <TitlePage text={'Phonebook'}></TitlePage>
-      <Form onSubmit={addOneContact} />
+      <Form />
+      {/* <Form onSubmit={addOneContact} /> */}
       <Heading text={'Contacts'}></Heading>
       <Filter filterId={filterId} filter={filter} />
       {!loading && contacts.length > 0 && (
-        <ContactList items={contacts} removeContact={onRremoveContact} />
+        
+        // <ContactList items={contacts} removeContact={onRremoveContact} />
+        <ContactList items={contacts} />
       )}
       {loading && <p>...loading</p>}
       {error && <p>oops, something went wrong</p>}
