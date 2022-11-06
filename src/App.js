@@ -9,11 +9,8 @@ import { TitlePage } from './components/Title/Title';
 import { Heading } from './components/Heading/Heading';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFilter } from 'redux/filter/filter-selectors';
-import {
-  getFilteredContacts,
-  getState,
-} from 'redux/contacts/contacts-selectors';
-import { fetchContacts, removeContact,addContact } from 'redux/contacts/contacts-operation';
+import {getState, getFilteredContacts,} from 'redux/contacts/contacts-selectors';
+import { fetchContacts, removeContact,addContact,isDublicate } from 'redux/contacts/contacts-operation';
 
 export default function App() {
   const contacts = useSelector(getFilteredContacts);
@@ -27,7 +24,12 @@ export default function App() {
   }, [dispatch]);
 
   const addOneContact = data => {
+    
     const action = addContact(data);
+  
+    if(isDublicate(data,contacts)) {
+      return alert(`${data.name} is already in contacts`);
+    }
     dispatch(action);
 };
 

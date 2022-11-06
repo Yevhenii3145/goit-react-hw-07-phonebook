@@ -1,7 +1,7 @@
 import * as api from '../../gettingData/getContacts';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const isDublicate = ({ name }, contacts) => {
+export const isDublicate = ({ name }, contacts) => {
 const normalizedName = name.toLowerCase();
   const result = contacts.find(contact => contact.name.toLowerCase() === normalizedName);
   return result;
